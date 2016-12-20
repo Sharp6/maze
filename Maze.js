@@ -37,6 +37,20 @@ function Maze(data) {
     return neighbors;
   };
 
+  this.getValidNeighbors = function(cell) {
+    var possibleCellsToMoveTo = Object.values(cell.walls).filter(function(wall) {
+      return !wall.state;
+    })
+    .map(function(wall) {
+      return cell.findWallDirection(wall);
+    })
+    .map(function(dir) {
+      return this.getNeighbor(cell,dir);
+    }.bind(this));
+
+    return possibleCellsToMoveTo;
+  }.bind(this);
+
   this.getNeighbor = function(cell,direction) {
     var cellIndex = this.grid.indexOf(cell);
     var cellDelta;

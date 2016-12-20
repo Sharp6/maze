@@ -31,7 +31,7 @@ var drawMaze = function() {
     if(stack.length > 0) {
         current = stack.pop();
     } else {
-      state = "solving";
+      state = "astarring";
     }
   }
 };

@@ -15,9 +15,9 @@ function solving() {
 
   solver.moveToCell(solveCurrent);
 
-  if(solveCurrent === maze.grid[(maze.cols * maze.rows) - 1]) {
+  if(solveCurrent === maze.grid[maze.cols * (maze.rows - 1)]) {
     console.log(solvePath);
-    
+
     state = "finished";
   }
 
@@ -45,9 +45,6 @@ function solving() {
   }
 
   //var randomCell = possibleCellsToMoveTo[Math.floor(Math.random() * possibleCellsToMoveTo.length)];
-
-
-
 
   solver.update();
   solver.draw();

@@ -1,8 +1,8 @@
 // CONFIG
 var config = {
-  cellWidth: 20,
-  width: 800,
-  height: 600
+  cellWidth: 40,
+  width: 400,
+  height: 400
 }
 
 // GLOBALS
@@ -10,6 +10,8 @@ var maze;
 var player;
 var solver;
 var state;
+
+var astar = new Astar();
 
 // SETUP
 function setup() {
@@ -25,10 +27,12 @@ function setup() {
   setupAlgo();
   setupSolver();
   setupPlayer();
+  astar.setup(maze, maze.grid[0], maze.grid[(maze.cols*maze.rows) - 1]);
 }
 
 // DRAW
 function draw() {
+  //console.log(frameRate());
   background(51);
   maze.draw();
   actions[state]();
@@ -38,12 +42,18 @@ var actions = {
   drawingMaze: drawMaze,
   playing: playing,
   solving: solving,
-  finished: finished
+  astarring: astar.update,
+  finished: finished,
+  failed: failed
 };
 
 function finished() {
   console.log("FINISHED");
-  solvePath.forEach(function(solveCell) {
+  astar.path.forEach(function(solveCell) {
     solveCell.highlight();
   });
+}
+
+function failed() {
+  //console.log("FAILED");
 }
