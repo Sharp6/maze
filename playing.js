@@ -41,7 +41,6 @@ function playing() {
     player.vel.mult(-2);
   }
 
-
   player.update();
   player.draw();
 }

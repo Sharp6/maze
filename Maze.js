@@ -67,11 +67,39 @@ function Maze(data) {
       case "right":
         cellDelta = 1;
         break;
+      case "bottomright":
+        cellDelta = this.cols + 1;
+        break;
       default:
         cellDelta = 0;
     }
     return this.grid[cellIndex + cellDelta];
   };
+
+  this.getDirectionFor = function(cellFrom, cellTo) {
+    var cellFromIndex = this.grid.indexOf(cellFrom);
+    var cellToIndex = this.grid.indexOf(cellTo);
+
+    var diff = cellToIndex - cellFromIndex;
+    var dir;
+    switch (diff) {
+      case -1:
+        dir = "left";
+        break;
+      case 1:
+        dir = "right";
+        break;
+      case -this.cols:
+        dir = "top";
+        break;
+      case this.cols:
+        dir = "bottom";
+        break;
+      default:
+        dir = "err";
+    }
+    return dir;
+  }
 
   this.getCellFor = function(vector) {
     var c = Math.floor(vector.x/this.cellWidth);
